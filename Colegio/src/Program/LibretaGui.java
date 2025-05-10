@@ -136,7 +136,7 @@ public class LibretaGui extends JFrame {
 		}
 		{
 			panel_4 = new JPanel();
-			panel_4.setBounds(330, 512, 181, 96);
+			panel_4.setBounds(330, 512, 181, 95);
 			contentPane.add(panel_4);
 		}
 		{
