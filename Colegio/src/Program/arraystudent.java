@@ -22,5 +22,13 @@ public int Tamaño() {
 public student Obtener(int x) {
 	return estu.get(x);
 }
+public student Buscar(int cod) {
+	for(int i=0;i<Tamaño();i++) {
+		if(Obtener(i).getCod()==cod) {
+			return Obtener(i);
+		}
+	}
+	return null;
+}
 
 }

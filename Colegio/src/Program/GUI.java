@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -117,7 +118,7 @@ public class GUI extends JFrame implements ActionListener {
 		{
 			btnEliminar = new JButton("Buscar");
 			btnEliminar.addActionListener(this);
-			btnEliminar.setBounds(245, 72, 85, 21);
+			btnEliminar.setBounds(340, 73, 85, 21);
 			contentPane.add(btnEliminar);
 		}
 		{
@@ -173,11 +174,28 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		{
 			btnEliminar_1 = new JButton("Eliminar");
-			btnEliminar_1.setBounds(150, 71, 85, 21);
+			btnEliminar_1.setBounds(245, 73, 85, 21);
 			contentPane.add(btnEliminar_1);
 		}
+		
+		lblNewLabel = new JLabel("Número de lista : ");
+		lblNewLabel.setBounds(27, 15, 125, 13);
+		contentPane.add(lblNewLabel);
+		
+		txtcode = new JTextField();
+		txtcode.setColumns(10);
+		txtcode.setBounds(150, 12, 96, 19);
+		contentPane.add(txtcode);
+		
+		btnRegistar = new JButton("Registar");
+		btnRegistar.addActionListener(this);
+		btnRegistar.setBounds(150, 73, 85, 21);
+		contentPane.add(btnRegistar);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnRegistar) {
+			do_btnRegistar_actionPerformed(e);
+		}
 		if (e.getSource() == btnEliminar) {
 			do_btnEliminar_actionPerformed(e);
 		}
@@ -198,6 +216,9 @@ public class GUI extends JFrame implements ActionListener {
 	private JLabel lblNewLabel_2;
 	private JButton btnNewButton;
 	private JButton btnEliminar_1;
+	private JLabel lblNewLabel;
+	private JTextField txtcode;
+	private JButton btnRegistar;
 	void Imprimir(String s) {
 		txtS.append(s+"\n");
 	}
@@ -206,5 +227,21 @@ public class GUI extends JFrame implements ActionListener {
 	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
 	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
+		student est = arreglo.Buscar(Integer.parseInt(txtcode.getText()));
+		if(est!=null) {
+			JOptionPane.showMessageDialog(this,"El estudiante y notas estan registradas");
+		}
+		else {
+			JOptionPane.showMessageDialog(this,"No esta registrado");
+		}
+
+	}
+	
+	protected void do_btnRegistar_actionPerformed(ActionEvent e) {
+		Imprimir("Número lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
+		for (int i = 0; i < arreglo.Tamaño(); i++) {
+			Imprimir(""+arreglo.Obtener(i).getCod()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
+		"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
+	}
 	}
 }
