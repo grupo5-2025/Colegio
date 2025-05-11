@@ -16,6 +16,9 @@ public arraystudent () {
 public void adicionar (student x) {
 	estu.add(x);
 }
+public void eliminar(student x) {
+	estu.remove(x);
+}
 public int Tamaño() {
 	return estu.size();
 }
@@ -24,7 +27,7 @@ public student Obtener(int x) {
 }
 public student Buscar(int cod) {
 	for(int i=0;i<Tamaño();i++) {
-		if(Obtener(i).getCod()==cod) {
+		if(Obtener(i).getOrden()==cod) {
 			return Obtener(i);
 		}
 	}

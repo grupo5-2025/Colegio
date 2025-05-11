@@ -14,6 +14,8 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.DropMode;
 
 public class GUI extends JFrame implements ActionListener {
 
@@ -29,9 +31,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JTextField txtnota2;
 	private JTextField txtnota3;
 	private JTextField txtnota4;
-	private JButton btnEliminar;
+	private JButton btnbuscar;
 	private JScrollPane scrollPane;
-	private JTextArea txtS;
 
 	/**
 	 * Launch the application.
@@ -67,7 +68,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		{
 			txtname = new JTextField();
-			txtname.setBounds(150, 37, 296, 19);
+			txtname.setBounds(160, 38, 296, 19);
 			contentPane.add(txtname);
 			txtname.setColumns(10);
 		}
@@ -78,7 +79,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		{
 			lblNotaN_4 = new JLabel("Nota N° 2");
-			lblNotaN_4.setBounds(284, 104, 59, 13);
+			lblNotaN_4.setBounds(266, 104, 59, 13);
 			contentPane.add(lblNotaN_4);
 		}
 		{
@@ -100,7 +101,7 @@ public class GUI extends JFrame implements ActionListener {
 		{
 			txtnota2 = new JTextField();
 			txtnota2.setColumns(10);
-			txtnota2.setBounds(273, 127, 70, 19);
+			txtnota2.setBounds(255, 127, 70, 19);
 			contentPane.add(txtnota2);
 		}
 		{
@@ -116,14 +117,14 @@ public class GUI extends JFrame implements ActionListener {
 			contentPane.add(txtnota4);
 		}
 		{
-			btnEliminar = new JButton("Buscar");
-			btnEliminar.addActionListener(this);
-			btnEliminar.setBounds(340, 73, 85, 21);
-			contentPane.add(btnEliminar);
+			btnbuscar = new JButton("Buscar");
+			btnbuscar.addActionListener(this);
+			btnbuscar.setBounds(340, 73, 85, 21);
+			contentPane.add(btnbuscar);
 		}
 		{
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(27, 157, 710, 165);
+			scrollPane.setBounds(27, 157, 710, 352);
 			contentPane.add(scrollPane);
 			{
 				txtS = new JTextArea();
@@ -131,49 +132,13 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		}
 		{
-			btnNewButton_1 = new JButton("CURSO #1");
-			btnNewButton_1.setBounds(481, 38, 109, 19);
-			contentPane.add(btnNewButton_1);
-		}
-		{
-			btnNewButton_2 = new JButton("CURSO #2");
-			btnNewButton_2.addActionListener(this);
-			btnNewButton_2.setBounds(600, 38, 107, 19);
-			contentPane.add(btnNewButton_2);
-		}
-		{
-			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(27, 333, 710, 165);
-			contentPane.add(scrollPane_1);
-			{
-				textArea = new JTextArea();
-				scrollPane_1.setViewportView(textArea);
-			}
-		}
-		{
-			lblNewLabel_1 = new JLabel("Registrar");
-			lblNewLabel_1.setBounds(486, 20, 46, 14);
-			contentPane.add(lblNewLabel_1);
-		}
-		{
-			textField = new JTextField();
-			textField.setBounds(364, 519, 373, 75);
-			contentPane.add(textField);
-			textField.setColumns(10);
-		}
-		{
-			lblNewLabel_2 = new JLabel("Observaciones del docente:");
-			lblNewLabel_2.setBounds(224, 541, 142, 31);
+			lblNewLabel_2 = new JLabel("Notas del docente:");
+			lblNewLabel_2.setBounds(180, 541, 142, 31);
 			contentPane.add(lblNewLabel_2);
 		}
 		{
-			btnNewButton = new JButton("GENERAR LIBRETA");
-			btnNewButton.addActionListener(this);
-			btnNewButton.setBounds(31, 532, 183, 49);
-			contentPane.add(btnNewButton);
-		}
-		{
 			btnEliminar_1 = new JButton("Eliminar");
+			btnEliminar_1.addActionListener(this);
 			btnEliminar_1.setBounds(245, 73, 85, 21);
 			contentPane.add(btnEliminar_1);
 		}
@@ -184,50 +149,50 @@ public class GUI extends JFrame implements ActionListener {
 		
 		txtcode = new JTextField();
 		txtcode.setColumns(10);
-		txtcode.setBounds(150, 12, 96, 19);
+		txtcode.setBounds(160, 12, 70, 19);
 		contentPane.add(txtcode);
 		
 		btnRegistar = new JButton("Registar");
 		btnRegistar.addActionListener(this);
-		btnRegistar.setBounds(150, 73, 85, 21);
+		btnRegistar.setBounds(546, 26, 149, 42);
 		contentPane.add(btnRegistar);
+		{
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(299, 519, 424, 90);
+			contentPane.add(scrollPane_1);
+			{
+				textArea_1 = new JTextArea();
+				scrollPane_1.setViewportView(textArea_1);
+			}
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEliminar_1) {
+			do_btnEliminar_1_actionPerformed(e);
+		}
 		if (e.getSource() == btnRegistar) {
 			do_btnRegistar_actionPerformed(e);
 		}
-		if (e.getSource() == btnEliminar) {
+		if (e.getSource() == btnbuscar) {
 			do_btnEliminar_actionPerformed(e);
-		}
-		if (e.getSource() == btnNewButton) {
-			do_btnNewButton_actionPerformed(e);
-		}
-		if (e.getSource() == btnNewButton_2) {
-			do_btnNewButton_2_actionPerformed(e);
 		}
 	}
 	arraystudent arreglo = new arraystudent();
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JScrollPane scrollPane_1;
-	private JLabel lblNewLabel_1;
-	private JTextArea textArea;
-	private JTextField textField;
 	private JLabel lblNewLabel_2;
-	private JButton btnNewButton;
 	private JButton btnEliminar_1;
 	private JLabel lblNewLabel;
 	private JTextField txtcode;
 	private JButton btnRegistar;
-	void Imprimir(String s) {
+	private JTextArea txtS;
+	private JScrollPane scrollPane_1;
+	private JTextArea textArea_1;
+	
+	void Imprimir(String s) 
+	{
 		txtS.append(s+"\n");
 	}
-	protected void do_btnNewButton_2_actionPerformed(ActionEvent e) {
-	}
-	protected void do_btnNewButton_actionPerformed(ActionEvent e) {
-	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
-		student est = arreglo.Buscar(Integer.parseInt(txtcode.getText()));
+		student est = arreglo.Buscar(orden());
 		if(est!=null) {
 			JOptionPane.showMessageDialog(this,"El estudiante y notas estan registradas");
 		}
@@ -236,12 +201,50 @@ public class GUI extends JFrame implements ActionListener {
 		}
 
 	}
-	
+	public int orden() {
+		return Integer.parseInt(txtcode.getText());
+	}
+	public String nombre() {
+		return txtname.getText();
+	}
+	public double n1() {
+		return Double.parseDouble(txtnota1.getText());
+	}
+	public double n2() {
+		return Double.parseDouble(txtnota2.getText());
+	}
+	public double n3() {
+		return Double.parseDouble(txtnota3.getText());
+	}
+	public double n4() {
+		return Double.parseDouble(txtnota4.getText());
+	}
 	protected void do_btnRegistar_actionPerformed(ActionEvent e) {
-		Imprimir("Número lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
+		if(arreglo.Buscar(orden())==null) {
+		txtS.setText("");
+		student estu=new student(orden(),nombre(),n1(),n2(),n3(),n4());
+		arreglo.adicionar(estu);
+		Imprimir("# de lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
 		for (int i = 0; i < arreglo.Tamaño(); i++) {
-			Imprimir(""+arreglo.Obtener(i).getCod()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
+			Imprimir("    "+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
 		"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
+			}
+		}else {
+			JOptionPane.showMessageDialog(this, "Alumno ya registrado");
+		}
+	}
+	protected void do_btnEliminar_1_actionPerformed(ActionEvent e) {
+		student s = arreglo.Buscar(orden());
+		if(s != null) {
+			arreglo.eliminar(s); 
+			txtS.setText("");
+			Imprimir("# de lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
+			for (int i = 0; i < arreglo.Tamaño(); i++) {
+				Imprimir("    "+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
+			"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
+		}
+	}else {
+		JOptionPane.showMessageDialog(this, "Alumno no registrado");
 	}
 	}
 }
