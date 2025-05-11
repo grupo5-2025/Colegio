@@ -192,20 +192,27 @@ public class GUI extends JFrame implements ActionListener {
 		txtS.append(s+"\n");
 	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
-		student est = arreglo.Buscar(orden());
-		if(est!=null) {
-			JOptionPane.showMessageDialog(this,"El estudiante y notas estan registradas");
+		try {
+		if(txtcode.getText().isBlank()) {
+			JOptionPane.showMessageDialog(this, "Ingrese el número de lista del estudiante");
+		}else {
+			student est = arreglo.Buscar(orden());
+			if(est!=null) {
+				JOptionPane.showMessageDialog(this,"El estudiante y notas estan registradas");
+			}
+			else {
+				JOptionPane.showMessageDialog(this,"No esta registrado");
+			}
 		}
-		else {
-			JOptionPane.showMessageDialog(this,"No esta registrado");
+		}catch(Exception o) {
+			JOptionPane.showMessageDialog(this, "Número de orden de lista inválido");
 		}
-
 	}
 	public int orden() {
-		return Integer.parseInt(txtcode.getText());
+		return Integer.parseInt(txtcode.getText().trim());
 	}
 	public String nombre() {
-		return txtname.getText();
+		return txtname.getText().trim();
 	}
 	public double n1() {
 		return Double.parseDouble(txtnota1.getText());
@@ -220,7 +227,10 @@ public class GUI extends JFrame implements ActionListener {
 		return Double.parseDouble(txtnota4.getText());
 	}
 	protected void do_btnRegistar_actionPerformed(ActionEvent e) {
-		if(arreglo.Buscar(orden())==null) {
+		try {
+		if(n1()<0||n1()>20||n2()<0||n2()>20||n3()<0||n3()>20||n4()<0||n4()>20) JOptionPane.showMessageDialog(this, "Notas inválidas");
+		else {
+			if(arreglo.Buscar(orden())==null) {
 		txtS.setText("");
 		student estu=new student(orden(),nombre(),n1(),n2(),n3(),n4());
 		arreglo.adicionar(estu);
@@ -232,8 +242,16 @@ public class GUI extends JFrame implements ActionListener {
 		}else {
 			JOptionPane.showMessageDialog(this, "Alumno ya registrado");
 		}
+		}
+		}catch(Exception x){
+			JOptionPane.showMessageDialog(this, "Datos incorrectos");
+		}
 	}
 	protected void do_btnEliminar_1_actionPerformed(ActionEvent e) {
+		try {
+		if(txtcode.getText().isBlank()) {
+			JOptionPane.showMessageDialog(this, "Ingresar el número de lista del estudiante");
+		}else {
 		student s = arreglo.Buscar(orden());
 		if(s != null) {
 			arreglo.eliminar(s); 
@@ -245,6 +263,10 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}else {
 		JOptionPane.showMessageDialog(this, "Alumno no registrado");
+	}
+		}
+	}catch(Exception o) {
+		JOptionPane.showMessageDialog(this, "Número de orden de lista inválido");
 	}
 	}
 }
