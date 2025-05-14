@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.DropMode;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class GUI extends JFrame implements ActionListener {
 
@@ -55,7 +57,7 @@ public class GUI extends JFrame implements ActionListener {
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 784, 656);
+		setBounds(100, 100, 796, 656);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -124,7 +126,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		{
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(27, 157, 710, 352);
+			scrollPane.setBounds(27, 157, 673, 352);
 			contentPane.add(scrollPane);
 			{
 				txtS = new JTextArea();
@@ -165,8 +167,24 @@ public class GUI extends JFrame implements ActionListener {
 				scrollPane_1.setViewportView(textArea_1);
 			}
 		}
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBackground(new Color(240, 240, 240));
+		lblNewLabel_1.setBounds(692, 155, 100, 100);
+		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
+		{
+			btnVolver = new JButton("Volver");
+			btnVolver.addActionListener(this);
+			btnVolver.setBounds(445, 73, 85, 21);
+			contentPane.add(btnVolver);
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnVolver) {
+			do_btnVolver_actionPerformed(e);
+		}
 		if (e.getSource() == btnEliminar_1) {
 			do_btnEliminar_1_actionPerformed(e);
 		}
@@ -186,6 +204,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JTextArea txtS;
 	private JScrollPane scrollPane_1;
 	private JTextArea textArea_1;
+	private JLabel lblNewLabel_1;
+	private JButton btnVolver;
 	
 	void Imprimir(String s) 
 	{
@@ -193,17 +213,25 @@ public class GUI extends JFrame implements ActionListener {
 	}
 	protected void do_btnEliminar_actionPerformed(ActionEvent e) {
 		try {
+			if(arreglo.Buscar(orden())==null) {
+				JOptionPane.showMessageDialog(this, "No hay estudiante registrado");
+			}else 
+			{
 		if(txtcode.getText().isBlank()) {
 			JOptionPane.showMessageDialog(this, "Ingrese el número de lista del estudiante");
 		}else {
-			student est = arreglo.Buscar(orden());
-			if(est!=null) {
-				JOptionPane.showMessageDialog(this,"El estudiante y notas estan registradas");
-			}
-			else {
-				JOptionPane.showMessageDialog(this,"No esta registrado");
-			}
+			for(int i=0;i<arreglo.Tamaño();i++) 
+			{
+				if(arreglo.Obtener(i).getOrden()==orden()) {
+				txtS.setText("");
+				txtS.append(""+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+
+				arreglo.Obtener(i).getN1()+"\t"+arreglo.Obtener(i).getN2()+
+				"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+
+				arreglo.Obtener(i).promedio());
+				}
 		}
+		}
+			}
 		}catch(Exception o) {
 			JOptionPane.showMessageDialog(this, "Número de orden de lista inválido");
 		}
@@ -238,13 +266,22 @@ public class GUI extends JFrame implements ActionListener {
 		for (int i = 0; i < arreglo.Tamaño(); i++) {
 			Imprimir("    "+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
 		"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
-			}
+		}
 		}else {
 			JOptionPane.showMessageDialog(this, "Alumno ya registrado");
 		}
 		}
 		}catch(Exception x){
 			JOptionPane.showMessageDialog(this, "Datos incorrectos");
+		}
+		for (int i = 0; i < arreglo.Tamaño(); i++) {
+			if(arreglo.Obtener(i).promedio()<=11) {
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
+			break;
+		}else 
+		{
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
+		}
 		}
 	}
 	protected void do_btnEliminar_1_actionPerformed(ActionEvent e) {
@@ -268,5 +305,31 @@ public class GUI extends JFrame implements ActionListener {
 	}catch(Exception o) {
 		JOptionPane.showMessageDialog(this, "Número de orden de lista inválido");
 	}
+		for (int i = 0; i < arreglo.Tamaño(); i++) {
+			if(arreglo.Obtener(i).promedio()<=11) {
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
+			break;
+		}else 
+		{
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
+		}
 	}
+	}
+	protected void do_btnVolver_actionPerformed(ActionEvent e) {
+		txtS.setText("");
+		Imprimir("# de lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
+		for (int i = 0; i < arreglo.Tamaño(); i++) {
+			Imprimir("    "+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+arreglo.Obtener(i).getN1()+
+		"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
+		}
+		for (int i = 0; i < arreglo.Tamaño(); i++) {
+			if(arreglo.Obtener(i).promedio()<=11) {
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
+			break;
+		}else 
+		{
+			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
+		}
+	}
+}
 }
