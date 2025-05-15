@@ -224,10 +224,13 @@ public class GUI extends JFrame implements ActionListener {
 			{
 				if(arreglo.Obtener(i).getOrden()==orden()) {
 				txtS.setText("");
+				Imprimir("# de lista\tNombre\t\tNota 1\tNota 2\tNota 3\tNota 4\tPromedio");
 				txtS.append(""+arreglo.Obtener(i).getOrden()+"\t"+arreglo.Obtener(i).getNom()+"\t"+
 				arreglo.Obtener(i).getN1()+"\t"+arreglo.Obtener(i).getN2()+
 				"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+
 				arreglo.Obtener(i).promedio());
+				if(arreglo.Obtener(i).promedio()<12) lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
+				else lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
 				}
 		}
 		}
@@ -275,10 +278,10 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, "Datos invalidos. \nPor favor rellene todos los campos correctamente.");
 		}
 		for (int i = 0; i < arreglo.Tamaño(); i++) {
-			if(arreglo.Obtener(i).promedio()<10.5) {
+			if(arreglo.Obtener(i).promedio()<12) {
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
 			break;
-		}else if (arreglo.Obtener(i).promedio()>=10.5)
+		}else 
 		{
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
 		}
@@ -306,10 +309,10 @@ public class GUI extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(this, "Número de orden de lista inválido");
 	}
 		for (int i = 0; i < arreglo.Tamaño(); i++) {
-			if(arreglo.Obtener(i).promedio()<10.5) {
+			if(arreglo.Obtener(i).promedio()<12) {
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
 			break;
-		}else if (arreglo.Obtener(i).promedio()>=10.5)
+		}else 
 		{
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
 		}
@@ -323,10 +326,10 @@ public class GUI extends JFrame implements ActionListener {
 		"\t"+arreglo.Obtener(i).getN2()+"\t"+arreglo.Obtener(i).getN3()+"\t"+arreglo.Obtener(i).getN4()+"\t"+arreglo.Obtener(i).promedio());
 		}
 		for (int i = 0; i < arreglo.Tamaño(); i++) {
-			if(arreglo.Obtener(i).promedio()<10.5) {
+			if(arreglo.Obtener(i).promedio()<12) {
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Desaprobado.png")));
 			break;
-			}else if (arreglo.Obtener(i).promedio()>=10.5)
+			}else 
 		{
 			lblNewLabel_1.setIcon(new ImageIcon(GUI.class.getResource("/Program/Imagenes/Aprobado.png")));
 		}
